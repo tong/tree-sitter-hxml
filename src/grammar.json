@@ -1,0 +1,450 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/grammar.schema.json",
+  "name": "hxml_connect",
+  "rules": {
+    "source_file": {
+      "type": "REPEAT",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "include"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "flag_classpath"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "flag_connect"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "flag_dce"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "flag_define"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "flag_library"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "flag_main"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "flag_target"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "flag"
+          }
+        ]
+      }
+    },
+    "flag": {
+      "type": "TOKEN",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "--undefine"
+          },
+          {
+            "type": "STRING",
+            "value": "--haxelib-global"
+          },
+          {
+            "type": "STRING",
+            "value": "--no-traces"
+          },
+          {
+            "type": "STRING",
+            "value": "--no-output"
+          },
+          {
+            "type": "STRING",
+            "value": "--no-inline"
+          },
+          {
+            "type": "STRING",
+            "value": "--no-opt"
+          },
+          {
+            "type": "STRING",
+            "value": "-v"
+          },
+          {
+            "type": "STRING",
+            "value": "--verbose"
+          },
+          {
+            "type": "STRING",
+            "value": "--debug"
+          },
+          {
+            "type": "STRING",
+            "value": "--prompt"
+          },
+          {
+            "type": "STRING",
+            "value": "--times"
+          },
+          {
+            "type": "STRING",
+            "value": "--each"
+          },
+          {
+            "type": "STRING",
+            "value": "--next"
+          },
+          {
+            "type": "STRING",
+            "value": "--display"
+          },
+          {
+            "type": "STRING",
+            "value": "--version"
+          },
+          {
+            "type": "STRING",
+            "value": "-h"
+          },
+          {
+            "type": "STRING",
+            "value": "--help"
+          },
+          {
+            "type": "STRING",
+            "value": "--help-defines"
+          },
+          {
+            "type": "STRING",
+            "value": "--help-user-defines"
+          },
+          {
+            "type": "STRING",
+            "value": "--help-metas"
+          },
+          {
+            "type": "STRING",
+            "value": "--help-user-metas"
+          }
+        ]
+      }
+    },
+    "flag_define": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "-D"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "define_key"
+            },
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "define_key"
+                },
+                {
+                  "type": "STRING",
+                  "value": "="
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "define_value"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "define_key": {
+      "type": "PATTERN",
+      "value": "[^#\\s=]+"
+    },
+    "define_value": {
+      "type": "PATTERN",
+      "value": "[^#\\s]+"
+    },
+    "flag_classpath": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "-p"
+            },
+            {
+              "type": "STRING",
+              "value": "--class-path"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "path"
+        }
+      ]
+    },
+    "flag_main": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "--main"
+            },
+            {
+              "type": "STRING",
+              "value": "-m"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "classpath"
+        }
+      ]
+    },
+    "flag_connect": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "--connect"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "connect_arg"
+        }
+      ]
+    },
+    "connect_arg": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "connect_host"
+            },
+            {
+              "type": "STRING",
+              "value": ":"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "connect_port"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "connect_port"
+        }
+      ]
+    },
+    "connect_host": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "[A-Za-z_.-][A-Za-z0-9_.-]*"
+      }
+    },
+    "connect_port": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "\\d+"
+      }
+    },
+    "flag_dce": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "--dce"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "std"
+            },
+            {
+              "type": "STRING",
+              "value": "full"
+            },
+            {
+              "type": "STRING",
+              "value": "no"
+            }
+          ]
+        }
+      ]
+    },
+    "flag_library": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "-L"
+            },
+            {
+              "type": "STRING",
+              "value": "--library"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_library_value"
+        }
+      ]
+    },
+    "_library_value": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "library_name"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": ":"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "library_version"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "library_name": {
+      "type": "PATTERN",
+      "value": "[A-Za-z0-9_.-]+"
+    },
+    "library_version": {
+      "type": "PATTERN",
+      "value": "[A-Za-z0-9_.-]+"
+    },
+    "flag_target": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "target_name"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "target_path"
+        }
+      ]
+    },
+    "target_name": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "-hl"
+        },
+        {
+          "type": "STRING",
+          "value": "--hl"
+        },
+        {
+          "type": "STRING",
+          "value": "-js"
+        },
+        {
+          "type": "STRING",
+          "value": "--js"
+        }
+      ]
+    },
+    "target_path": {
+      "type": "PATTERN",
+      "value": "[a-zA-Z0-9._\\/-]+\\.(hl|js)"
+    },
+    "comment": {
+      "type": "TOKEN",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "#"
+          },
+          {
+            "type": "PATTERN",
+            "value": ".*"
+          }
+        ]
+      }
+    },
+    "include": {
+      "type": "PATTERN",
+      "value": "[^#\\s]+\\.hxml"
+    },
+    "classpath": {
+      "type": "PATTERN",
+      "value": "[A-Za-z_][A-Za-z0-9_.-]*"
+    },
+    "path": {
+      "type": "PATTERN",
+      "value": "[^#\\s]+"
+    }
+  },
+  "extras": [
+    {
+      "type": "PATTERN",
+      "value": "\\s+"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "comment"
+    }
+  ],
+  "conflicts": [],
+  "precedences": [],
+  "externals": [],
+  "inline": [],
+  "supertypes": [],
+  "reserved": {}
+}

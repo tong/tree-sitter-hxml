@@ -1,0 +1,25 @@
+===========
+define flag
+===========
+
+-D value
+
+---
+
+(source_file
+  (flag_define
+    (define_key)))
+
+======================
+define flag with value
+======================
+
+-D key=value
+
+---
+
+(source_file
+  (flag_define
+    (define_key)
+    (define_value)))
+

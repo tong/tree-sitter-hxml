@@ -1,0 +1,25 @@
+=======
+comment
+=======
+
+# This is a comment
+# This is another comment
+
+---
+
+(source_file
+  (comment)
+  (comment))
+
+=======
+include
+=======
+
+common.hxml
+
+---
+
+(source_file
+  (include))
+
+

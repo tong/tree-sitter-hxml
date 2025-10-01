@@ -1,0 +1,41 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/config.schema.json",
+  "grammars": [
+    {
+      "name": "hxml",
+      "camelcase": "Hxml",
+      "title": "Hxml",
+      "scope": "source.hxml",
+      "file-types": [
+        "hxml"
+      ],
+      "highlights": "queries/highlights.scm",
+      "injection-regex": "^hxml$",
+      "class-name": "TreeSitterHxml"
+    }
+  ],
+  "metadata": {
+    "version": "0.1.0",
+    "license": "MIT",
+    "description": "Haxe hxml files",
+    "authors": [
+      {
+        "name": "tong",
+        "email": "tong@disktree.net",
+        "url": "https://disktree.net/"
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/tong/tree-sitter-hxml"
+    }
+  },
+  "bindings": {
+    "c": true,
+    "go": true,
+    "node": true,
+    "python": true,
+    "rust": true,
+    "swift": true,
+    "zig": false
+  }
+}

@@ -1,0 +1,306 @@
+[
+  {
+    "type": "connect_arg",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "connect_host",
+          "named": true
+        },
+        {
+          "type": "connect_port",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "define_value",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "flag_classpath",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "path",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "flag_connect",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "connect_arg",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "flag_dce",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "flag_define",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "define_key",
+          "named": true
+        },
+        {
+          "type": "define_value",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "flag_library",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "library_name",
+          "named": true
+        },
+        {
+          "type": "library_version",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "flag_main",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "classpath",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "flag_target",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "target_name",
+          "named": true
+        },
+        {
+          "type": "target_path",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "library_name",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "library_version",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "path",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "source_file",
+    "named": true,
+    "root": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "flag",
+          "named": true
+        },
+        {
+          "type": "flag_classpath",
+          "named": true
+        },
+        {
+          "type": "flag_connect",
+          "named": true
+        },
+        {
+          "type": "flag_dce",
+          "named": true
+        },
+        {
+          "type": "flag_define",
+          "named": true
+        },
+        {
+          "type": "flag_library",
+          "named": true
+        },
+        {
+          "type": "flag_main",
+          "named": true
+        },
+        {
+          "type": "flag_target",
+          "named": true
+        },
+        {
+          "type": "include",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "target_name",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "--class-path",
+    "named": false
+  },
+  {
+    "type": "--connect",
+    "named": false
+  },
+  {
+    "type": "--dce",
+    "named": false
+  },
+  {
+    "type": "--hl",
+    "named": false
+  },
+  {
+    "type": "--js",
+    "named": false
+  },
+  {
+    "type": "--library",
+    "named": false
+  },
+  {
+    "type": "--main",
+    "named": false
+  },
+  {
+    "type": "-D",
+    "named": false
+  },
+  {
+    "type": "-L",
+    "named": false
+  },
+  {
+    "type": "-hl",
+    "named": false
+  },
+  {
+    "type": "-js",
+    "named": false
+  },
+  {
+    "type": "-m",
+    "named": false
+  },
+  {
+    "type": "-p",
+    "named": false
+  },
+  {
+    "type": ":",
+    "named": false
+  },
+  {
+    "type": "=",
+    "named": false
+  },
+  {
+    "type": "classpath",
+    "named": true
+  },
+  {
+    "type": "comment",
+    "named": true,
+    "extra": true
+  },
+  {
+    "type": "connect_host",
+    "named": true
+  },
+  {
+    "type": "connect_port",
+    "named": true
+  },
+  {
+    "type": "define_key",
+    "named": true
+  },
+  {
+    "type": "flag",
+    "named": true
+  },
+  {
+    "type": "full",
+    "named": false
+  },
+  {
+    "type": "include",
+    "named": true
+  },
+  {
+    "type": "no",
+    "named": false
+  },
+  {
+    "type": "std",
+    "named": false
+  },
+  {
+    "type": "target_path",
+    "named": true
+  }
+]

@@ -1,0 +1,95 @@
+=====
+flags
+=====
+
+--version
+--help
+--help-metas
+
+---
+
+(source_file
+  (flag)
+  (flag)
+  (flag))
+
+
+===========
+flag main
+===========
+
+--main App
+
+---
+
+(source_file
+    (flag_main
+      (classpath)))
+
+======================
+flag dce
+======================
+
+--dce full
+
+---
+
+(source_file
+  (flag_dce))
+
+======================
+flag library
+======================
+
+--library heaps
+
+---
+
+(source_file
+  (flag_library
+    (library_name))) 
+
+======================
+flag library version
+======================
+
+--library heaps:1.2.3
+
+---
+
+(source_file
+  (flag_library
+    (library_name)
+    (library_version))) 
+
+
+======================
+flag classpath
+======================
+
+-p src
+--class-path src
+
+---
+
+(source_file
+  (flag_classpath (path))
+  (flag_classpath (path)))
+
+============
+flag connect
+============
+
+--connect 6000
+--connect localhost:6000
+
+---
+
+(source_file
+  (flag_connect
+    (connect_arg
+      (connect_port)))
+  (flag_connect
+    (connect_arg
+      (connect_host)
+      (connect_port))))
