@@ -1,0 +1,38 @@
+# Mobile application build
+# iOS and Android deployment
+
+--main mobile.MobileApp
+-p src
+-p mobile
+
+# Mobile-specific libraries
+--library openfl:9.1.0
+--library actuate:1.9.0
+--library extension-admob:3.0.0
+
+# Mobile defines
+-D mobile
+-D openfl-next
+-D tools=2.9.1
+
+# Resources optimized for mobile
+--resource assets/mobile/@mobile_assets
+--resource icons/icon.png@app_icon
+
+# iOS Configuration
+-D ios
+-D HXCPP_ARM64
+-D HXCPP_CPP11
+
+# Android Configuration  
+-D android
+-D android-target-sdk=30
+-D android-min-sdk=21
+
+# Optimization for mobile
+--dce full
+-D no-traces
+-D no-reflection
+
+# Custom mobile target
+--custom-target mobile=platforms/mobile

@@ -1,0 +1,9 @@
+# Basic Haxe compilation configuration
+# Simple web application build
+
+--main App
+--js output/app.js
+-p src
+--library heaps
+--dce full
+-D debug

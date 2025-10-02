@@ -1,0 +1,39 @@
+# Library development configuration
+# For developing and testing Haxe libraries
+
+--main test.TestRunner
+-p src
+-p test
+
+# Testing libraries
+--library utest:2.0.1
+--library munit:2.3.4
+--library buddy:2.12.1
+
+# Library being developed
+-p lib
+
+# Test-specific defines
+-D test
+-D debug
+-D source-map
+
+# Multiple test targets
+--interp
+
+# Also generate docs
+--next
+-D doc-gen
+--no-output
+
+# Performance testing
+--next
+--cpp test/cpp
+-D test-performance
+--dce no
+
+# Coverage testing  
+--next
+--js test/coverage.js
+-D coverage
+-D source-map-content

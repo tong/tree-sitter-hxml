@@ -1,0 +1,54 @@
+# Edge cases and special syntax
+# Tests complex parsing scenarios
+
+# Unusual but valid paths and names
+--main weird.Package123.Main_Class
+-p src_with_underscores
+-p /absolute/path/src
+-p ./relative/path
+
+# Complex library names with versions
+--library some-complex_lib.name:1.2.3-beta.4
+--library git_repo:dev-branch-name
+-L under_score_lib:1.0.0-rc1
+
+# Complex defines
+-D key=value:with:colons
+-D path=/home/user/project
+-D url=https://example.com:8080/path
+
+# Resources with complex paths
+--resource assets/file-with-dashes.json@config
+-r ./relative/resource.bin@rel_resource
+
+# Network edge cases
+--connect [2001:0db8:85a3:0000:0000:8a2e:0370:7334]:8080
+--connect 192.168.1.1:65535
+--connect localhost:1
+--connect 999
+
+# Complex macros
+--macro 'Complex.call("string with quotes", {key: "value"})'
+--macro Some.macro(param1, param2);
+--macro 'Build.process(["item1", "item2", "item3"])'
+
+# Files with various extensions and paths
+--js ../output/complex-name_v2.js
+--cpp /absolute_path/output_with_underscores/
+--neko ./bin/app-v1.2.3.n
+
+# Custom targets with complex parameters
+--custom-target complex_target=param1:value1,param2:value2
+--custom-target simple
+
+# Comments with special characters
+# This is a comment with symbols: @#$%^&*()
+# Unicode comment: 你好世界 🌍 
+
+# Server addresses edge cases
+--server-listen stdio
+--server-connect [::ffff:192.168.1.1]:8080
+
+# Command with complex arguments
+--cmd echo "Hello World" && ls -la
+--cmd python3 script.py --arg1=value --arg2=quoted_value

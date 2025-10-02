@@ -1,0 +1,82 @@
+# Advanced configuration showcasing all features
+# Complex build with custom targets and extensive configuration
+
+# Main application
+--main advanced.Application
+-p src
+-p lib/src
+--class-path /usr/local/lib/haxe
+
+# Multiple libraries with versions
+--library actuate:1.9.0
+--library openfl:9.1.0
+--library lime:8.0.1
+-L hxcpp:4.2.1
+-L format:3.5.0
+
+# Complex defines with values
+-D openfl=9.1.0
+-D lime=8.0.1
+-D tools=2.9.1
+-D FLX_NO_DEBUG
+-D no-deprecation-warnings
+-D HXCPP_QUIET
+-D advanced_build=true
+
+# Resource embedding with custom names
+--resource assets/config.xml@config
+--resource assets/manifest.json@manifest
+-r textures/sheet.png@textures
+-r sounds/effects/@sfx
+
+# Multiple connection types
+--connect [::1]:6000
+--connect 192.168.1.100:6000
+--server-listen stdio
+--server-connect localhost:6000
+
+# Package remapping
+--remap flash:openfl
+--remap nme:lime
+
+# Complex macros
+--macro advanced.Macros.processAssets()
+--macro 'Build.optimize("release")'
+--macro 'Logger.setup({level: "info", output: "console"})'
+
+# Custom targets
+--custom-target neko
+--custom-target cs=bin/cs
+
+# HXB libraries
+--hxb-lib precompiled/core.zip
+--hxb-lib libs/utils.hxb
+
+# All DCE modes in different sections
+--dce full
+
+# Multiple working directories and commands  
+--cwd build/temp
+--cmd mkdir -p assets
+--cmd cp -r res/* assets/
+
+# Flags for debugging and optimization
+--debug
+--verbose
+--times
+--no-traces
+--no-inline
+--no-opt
+--prompt
+
+# File execution
+--run tools.BuildScript arg1 arg2 arg3
+
+# Network addresses
+--connect 6000
+--connect localhost:8080
+--connect [2001:db8::1]:9000
+
+# Comments and documentation
+# This build creates multiple outputs
+# for different deployment scenarios

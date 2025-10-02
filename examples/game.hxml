@@ -1,0 +1,32 @@
+# Game development build configuration
+# Multi-target game with assets
+
+--main game.Main
+-p src
+-p game/src
+--class-path lib
+
+# Libraries
+--library heaps:1.10.0
+--library hxbit:1.5.2
+--library differ:4.0.1
+-L castle:1.0.0
+
+# Resources
+--resource assets/sprites.png@sprites
+--resource assets/sounds/@sounds
+--resource data/levels.json@levels
+
+# Defines
+-D resourcesPath=assets/
+-D version=1.0.0
+-D analytics=true
+
+# Targets
+--js bin/game.js
+--hl bin/game.hl
+
+# Debug options
+--debug
+--times
+-v

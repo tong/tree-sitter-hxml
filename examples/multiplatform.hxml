@@ -1,0 +1,49 @@
+# Multi-platform application build
+# Demonstrates various compilation targets
+
+--main cross.App
+-p src
+-p platform
+
+# Common libraries
+--library haxe-strings:6.0.3
+--library safety:1.1.1
+
+# Platform defines
+-D HXCPP_QUIET
+-D static_link
+
+# Include common configuration
+common.hxml
+
+# JavaScript target
+--next
+--js dist/web/app.js
+-D web
+--dce std
+
+# Native C++ targets  
+--next
+--cpp dist/cpp
+-D desktop
+-D static
+
+# JVM target
+--next
+--jvm dist/java/App.jar
+-D java
+
+# HashLink target
+--next
+--hl dist/hl/app.hl
+-D hashlink
+
+# Python target
+--next
+--python dist/python/app.py
+-D python
+
+# Lua target
+--next  
+--lua dist/lua/app.lua
+-D lua

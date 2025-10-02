@@ -1,0 +1,34 @@
+# Server-side application
+# API backend with database connectivity
+
+--main server.App
+-p src
+-p shared
+
+# Libraries for server development
+--library tink_web:0.4.0
+--library tink_sql:0.17.0
+--library record-macros:3.1.1
+
+# Server-specific defines
+-D server
+-D mysql
+-D tink_state
+-D no-traces
+
+# Compilation server
+--connect localhost:6000
+--server-listen 127.0.0.1:6000
+
+# Target
+--neko bin/server.n
+
+# Macros
+--macro server.Macros.buildAPI()
+--macro 'Build.generateRoutes("config/routes.json")'
+
+# Working directory
+--cwd /opt/app
+
+# Commands
+--cmd echo "Building server..."

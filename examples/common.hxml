@@ -1,0 +1,13 @@
+# Common configuration included by other builds
+# Shared libraries and settings
+
+--library hxcpp:4.2.1
+--library format:3.5.0
+
+# Common defines
+-D haxe-ver=4.3.0
+-D no-compilation
+-D source-map-content
+
+# Common class paths
+-p shared/src
