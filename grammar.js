@@ -20,6 +20,7 @@ module.exports = grammar({
       $.connect,
       $.dce,
       $.define,
+      $.display,
       $.hxb_lib,
       $.include,
       $.library,
@@ -31,13 +32,15 @@ module.exports = grammar({
       $.server_listen,
       $.target,
       $.type_path,
+      $.undefine,
+      $.json_output,
+      $.xml_output,
       $.flag,
     )),
 
     // Standalone flags without arguments
     flag: _ => token(choice(
       "--debug",
-      "--undefine",
       "--haxelib-global",
       "--no-traces",
       "--no-output",
@@ -49,7 +52,6 @@ module.exports = grammar({
       "--times",
       "--each",
       "--next",
-      "--display",
       "--version",
       "-h",
       "--help",
@@ -65,6 +67,9 @@ module.exports = grammar({
       alias(/[^#\s=]+(=[^#\s]*)?/, $.constant)
     ),
 
+    undefine: $ => seq("--undefine", $.argument),
+    display: $ => seq("--display", $.argument),
+
     // Target compilation options
     target: $ => choice(
       seq("--js", $.file),
@@ -78,7 +83,7 @@ module.exports = grammar({
       seq("--python", $.file),
       seq("--hl", $.file),
       seq("--custom-target", alias(/[A-Za-z0-9_-]+(=[^#\s]+)?/, $.custom_target)),
-      seq("--run", $.type_path, repeat($.argument)),
+      seq("--run", $.dot_path, repeat($.argument)),
       "--interp"
     ),
 
@@ -107,10 +112,13 @@ module.exports = grammar({
       token(/'[^']*'/)
     ),
 
+    json_output: $ => seq('--json', $.file),
+    xml_output: $ => seq('--xml', $.file),
+
     cmd: $ => seq("--cmd", $.command),
     cwd: $ => seq(choice("-C", "--cwd"), $.directory),
     dce: $ => seq("--dce", alias(choice("std", "full", "no"), $.dce_mode)),
-    remap: $ => seq("--remap", seq($.package, ":", $.package)),
+    remap: $ => seq("--remap", seq($.dot_path, ":", $.dot_path)),
     resource: $ => seq(
       choice("-r", "--resource"),
       $.file,
@@ -121,7 +129,8 @@ module.exports = grammar({
     server_listen: $ => seq("--server-listen", $.server_address),
     server_connect: $ => seq("--server-connect", $.server_address),
 
-    dot_path: _ => token(/[A-Za-z_][A-Za-z0-9_.-]*/),
+    // dot_path: _ => token(/[A-Za-z_][A-Za-z0-9_.-]*/),
+    dot_path: _ => token(/[A-Za-z_][A-Za-z0-9_]*(\.[A-Za-z_][A-Za-z0-9_]*)*/),
     argument: _ => token(/[^#\s]+/),
     file: _ => token(/[^#\s@]+/),
     directory: _ => token(/[^#\s]+/),

@@ -25,6 +25,8 @@
 (server_connect) @keyword
 (server_listen) @keyword
 (target) @keyword
+(json_output) @keyword
+(xml_output) @keyword
 
 
 ;;;
