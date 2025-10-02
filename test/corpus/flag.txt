@@ -1,0 +1,12 @@
+====
+flag
+====
+
+--help
+-h
+
+---
+
+(source_file
+  (flag)
+  (flag))

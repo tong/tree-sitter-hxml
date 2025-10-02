@@ -1,33 +1,65 @@
-(classpath) @type
+;; HXML semantic highlighting
+
 (comment) @comment
-(include) @include
 
-(flag_classpath)   @keyword
-(flag_dce)   @keyword
-(flag_define) @keyword
-(flag_library) @keyword
-(flag_main)   @keyword
-(flag_target)   @keyword
-(flag)   @keyword
+;;;
+;;; Keywords & Flags
+;;;
 
-; (target_name) @keyword
-; (target_path) @string
+;; Simple flags without arguments
+(flag) @keyword
 
-; (library_name) @keyword
-; (library_version) @type
+;; Flags with arguments
+(class_path) @keyword
+(cmd) @keyword
+(connect) @keyword
+(cwd) @keyword
+(dce) @keyword
+(define) @keyword
+(hxb_lib) @keyword
+(library) @keyword
+(macro) @keyword
+(main) @keyword
+(remap) @keyword
+(resource) @keyword
+(server_connect) @keyword
+(server_listen) @keyword
+(target) @keyword
 
-; -------------------------
-; Library flags (-L / --library)
-; -------------------------
-; (library) @keyword
-; (library_name)    @type
-; (library_version) @constant
 
-; (flag) @keyword
+;;;
+;;; Values & Arguments
+;;;
 
+;; Literals
+(constant) @constant
+(library_spec) @constant
+(dce_mode) @constant
+(custom_target) @constant
+(net_address) @string
+(server_address) @string
 
-; (flag_classpath) @keyword
+;; Paths and Types
+(file) @string
+(directory) @string
+(include) @string ; hxml file inclusion
+(dot_path) @namespace
+(type_path) @type
+(package) @namespace
+(resource_name) @property
 
-; DCE flag
-; (dce_name)  @keyword
-; (dce_value) @constant
+;; Other arguments
+(command) @string
+(argument) @string
+
+;; Macro calls
+(macro
+  (expr) @function)
+
+;;;
+;;; Rule specializations
+;;;
+
+;; Highlight the constant within a define statement
+(define
+  (constant) @constant)

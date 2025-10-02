@@ -1,0 +1,29 @@
+================================================================================
+library with version
+================================================================================
+
+--library heaps:1.2.3
+-L mylib:dev-branch
+
+---
+
+(source_file
+  (library
+    (library_spec))
+  (library
+    (library_spec)))
+
+================================================================================
+library without version
+================================================================================
+
+--library heaps
+-L mylib
+
+---
+
+(source_file
+  (library
+    (library_spec))
+  (library
+    (library_spec)))

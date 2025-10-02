@@ -1,6 +1,6 @@
 {
   "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/grammar.schema.json",
-  "name": "hxml_connect",
+  "name": "hxml",
   "rules": {
     "source_file": {
       "type": "REPEAT",
@@ -9,35 +9,75 @@
         "members": [
           {
             "type": "SYMBOL",
+            "name": "class_path"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "cmd"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "cwd"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "comment"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "connect"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "dce"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "define"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "hxb_lib"
+          },
+          {
+            "type": "SYMBOL",
             "name": "include"
           },
           {
             "type": "SYMBOL",
-            "name": "flag_classpath"
+            "name": "library"
           },
           {
             "type": "SYMBOL",
-            "name": "flag_connect"
+            "name": "macro"
           },
           {
             "type": "SYMBOL",
-            "name": "flag_dce"
+            "name": "main"
           },
           {
             "type": "SYMBOL",
-            "name": "flag_define"
+            "name": "remap"
           },
           {
             "type": "SYMBOL",
-            "name": "flag_library"
+            "name": "resource"
           },
           {
             "type": "SYMBOL",
-            "name": "flag_main"
+            "name": "server_connect"
           },
           {
             "type": "SYMBOL",
-            "name": "flag_target"
+            "name": "server_listen"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "target"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "type_path"
           },
           {
             "type": "SYMBOL",
@@ -51,6 +91,10 @@
       "content": {
         "type": "CHOICE",
         "members": [
+          {
+            "type": "STRING",
+            "value": "--debug"
+          },
           {
             "type": "STRING",
             "value": "--undefine"
@@ -82,10 +126,6 @@
           {
             "type": "STRING",
             "value": "--verbose"
-          },
-          {
-            "type": "STRING",
-            "value": "--debug"
           },
           {
             "type": "STRING",
@@ -138,50 +178,233 @@
         ]
       }
     },
-    "flag_define": {
+    "define": {
       "type": "SEQ",
       "members": [
-        {
-          "type": "STRING",
-          "value": "-D"
-        },
         {
           "type": "CHOICE",
           "members": [
             {
-              "type": "SYMBOL",
-              "name": "define_key"
+              "type": "STRING",
+              "value": "-D"
             },
             {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "define_key"
-                },
-                {
-                  "type": "STRING",
-                  "value": "="
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "define_value"
-                }
-              ]
+              "type": "STRING",
+              "value": "--define"
             }
           ]
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "PATTERN",
+            "value": "[^#\\s=]+(=[^#\\s]*)?"
+          },
+          "named": true,
+          "value": "constant"
         }
       ]
     },
-    "define_key": {
-      "type": "PATTERN",
-      "value": "[^#\\s=]+"
+    "target": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "--js"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "file"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "--lua"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "file"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "--swf"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "file"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "--neko"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "file"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "--php"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "directory"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "--cpp"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "directory"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "--cppia"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "file"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "--jvm"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "file"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "--python"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "file"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "--hl"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "file"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "--custom-target"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "PATTERN",
+                "value": "[A-Za-z0-9_-]+(=[^#\\s]+)?"
+              },
+              "named": true,
+              "value": "custom_target"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "--run"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "type_path"
+            },
+            {
+              "type": "REPEAT",
+              "content": {
+                "type": "SYMBOL",
+                "name": "argument"
+              }
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": "--interp"
+        }
+      ]
     },
-    "define_value": {
-      "type": "PATTERN",
-      "value": "[^#\\s]+"
+    "main": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "-m"
+            },
+            {
+              "type": "STRING",
+              "value": "--main"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "dot_path"
+        }
+      ]
     },
-    "flag_classpath": {
+    "class_path": {
       "type": "SEQ",
       "members": [
         {
@@ -199,112 +422,24 @@
         },
         {
           "type": "SYMBOL",
-          "name": "path"
+          "name": "directory"
         }
       ]
     },
-    "flag_main": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "STRING",
-              "value": "--main"
-            },
-            {
-              "type": "STRING",
-              "value": "-m"
-            }
-          ]
-        },
-        {
-          "type": "SYMBOL",
-          "name": "classpath"
-        }
-      ]
-    },
-    "flag_connect": {
+    "hxb_lib": {
       "type": "SEQ",
       "members": [
         {
           "type": "STRING",
-          "value": "--connect"
+          "value": "--hxb-lib"
         },
         {
           "type": "SYMBOL",
-          "name": "connect_arg"
+          "name": "file"
         }
       ]
     },
-    "connect_arg": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "connect_host"
-            },
-            {
-              "type": "STRING",
-              "value": ":"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "connect_port"
-            }
-          ]
-        },
-        {
-          "type": "SYMBOL",
-          "name": "connect_port"
-        }
-      ]
-    },
-    "connect_host": {
-      "type": "TOKEN",
-      "content": {
-        "type": "PATTERN",
-        "value": "[A-Za-z_.-][A-Za-z0-9_.-]*"
-      }
-    },
-    "connect_port": {
-      "type": "TOKEN",
-      "content": {
-        "type": "PATTERN",
-        "value": "\\d+"
-      }
-    },
-    "flag_dce": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "--dce"
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "STRING",
-              "value": "std"
-            },
-            {
-              "type": "STRING",
-              "value": "full"
-            },
-            {
-              "type": "STRING",
-              "value": "no"
-            }
-          ]
-        }
-      ]
-    },
-    "flag_library": {
+    "library": {
       "type": "SEQ",
       "members": [
         {
@@ -321,17 +456,159 @@
           ]
         },
         {
-          "type": "SYMBOL",
-          "name": "_library_value"
+          "type": "ALIAS",
+          "content": {
+            "type": "PATTERN",
+            "value": "[A-Za-z0-9_.-]+(:[A-Za-z0-9_.-]+)?"
+          },
+          "named": true,
+          "value": "library_spec"
         }
       ]
     },
-    "_library_value": {
+    "macro": {
       "type": "SEQ",
       "members": [
         {
+          "type": "STRING",
+          "value": "--macro"
+        },
+        {
           "type": "SYMBOL",
-          "name": "library_name"
+          "name": "expr"
+        }
+      ]
+    },
+    "expr": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "PATTERN",
+            "value": "[A-Za-z_][A-Za-z0-9_.]*(?:\\([^)]*\\))?;?"
+          }
+        },
+        {
+          "type": "TOKEN",
+          "content": {
+            "type": "PATTERN",
+            "value": "'[^']*'"
+          }
+        }
+      ]
+    },
+    "cmd": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "--cmd"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "command"
+        }
+      ]
+    },
+    "cwd": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "-C"
+            },
+            {
+              "type": "STRING",
+              "value": "--cwd"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "directory"
+        }
+      ]
+    },
+    "dce": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "--dce"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "STRING",
+                "value": "std"
+              },
+              {
+                "type": "STRING",
+                "value": "full"
+              },
+              {
+                "type": "STRING",
+                "value": "no"
+              }
+            ]
+          },
+          "named": true,
+          "value": "dce_mode"
+        }
+      ]
+    },
+    "remap": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "--remap"
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "package"
+            },
+            {
+              "type": "STRING",
+              "value": ":"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "package"
+            }
+          ]
+        }
+      ]
+    },
+    "resource": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "-r"
+            },
+            {
+              "type": "STRING",
+              "value": "--resource"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "file"
         },
         {
           "type": "CHOICE",
@@ -341,11 +618,11 @@
               "members": [
                 {
                   "type": "STRING",
-                  "value": ":"
+                  "value": "@"
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "library_version"
+                  "name": "resource_name"
                 }
               ]
             },
@@ -356,51 +633,169 @@
         }
       ]
     },
-    "library_name": {
-      "type": "PATTERN",
-      "value": "[A-Za-z0-9_.-]+"
-    },
-    "library_version": {
-      "type": "PATTERN",
-      "value": "[A-Za-z0-9_.-]+"
-    },
-    "flag_target": {
+    "connect": {
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "target_name"
+          "type": "STRING",
+          "value": "--connect"
         },
         {
           "type": "SYMBOL",
-          "name": "target_path"
+          "name": "net_address"
         }
       ]
     },
-    "target_name": {
-      "type": "CHOICE",
+    "server_listen": {
+      "type": "SEQ",
       "members": [
         {
           "type": "STRING",
-          "value": "-hl"
+          "value": "--server-listen"
         },
         {
-          "type": "STRING",
-          "value": "--hl"
-        },
-        {
-          "type": "STRING",
-          "value": "-js"
-        },
-        {
-          "type": "STRING",
-          "value": "--js"
+          "type": "SYMBOL",
+          "name": "server_address"
         }
       ]
     },
-    "target_path": {
-      "type": "PATTERN",
-      "value": "[a-zA-Z0-9._\\/-]+\\.(hl|js)"
+    "server_connect": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "--server-connect"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "server_address"
+        }
+      ]
+    },
+    "dot_path": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "[A-Za-z_][A-Za-z0-9_.-]*"
+      }
+    },
+    "argument": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "[^#\\s]+"
+      }
+    },
+    "file": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "[^#\\s@]+"
+      }
+    },
+    "directory": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "[^#\\s]+"
+      }
+    },
+    "command": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "[^#\\s][^#\\n]*"
+      }
+    },
+    "net_address": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "(?:\\[[0-9A-Fa-f:]+\\]|[0-9]{1,3}(?:\\.[0-9]{1,3}){3}|[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?(?:\\.[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?)*)?:[0-9]{1,5}|[0-9]{1,5}"
+      }
+    },
+    "server_address": {
+      "type": "TOKEN",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "stdio"
+          },
+          {
+            "type": "PATTERN",
+            "value": "[^#\\s]+"
+          }
+        ]
+      }
+    },
+    "resource_name": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "[A-Za-z_][A-Za-z0-9_]*"
+      }
+    },
+    "package": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "[a-z][A-Za-z0-9_]*"
+      }
+    },
+    "type": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "[A-Z][A-Za-z0-9_]*"
+      }
+    },
+    "type_path": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "package"
+                },
+                {
+                  "type": "REPEAT",
+                  "content": {
+                    "type": "SEQ",
+                    "members": [
+                      {
+                        "type": "STRING",
+                        "value": "."
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "package"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "STRING",
+                  "value": "."
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "type"
+        }
+      ]
     },
     "comment": {
       "type": "TOKEN",
@@ -419,26 +814,17 @@
       }
     },
     "include": {
-      "type": "PATTERN",
-      "value": "[^#\\s]+\\.hxml"
-    },
-    "classpath": {
-      "type": "PATTERN",
-      "value": "[A-Za-z_][A-Za-z0-9_.-]*"
-    },
-    "path": {
-      "type": "PATTERN",
-      "value": "[^#\\s]+"
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "[^#\\s]+\\.hxml"
+      }
     }
   },
   "extras": [
     {
       "type": "PATTERN",
       "value": "\\s+"
-    },
-    {
-      "type": "SYMBOL",
-      "name": "comment"
     }
   ],
   "conflicts": [],

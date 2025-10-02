@@ -1,0 +1,95 @@
+================================================================================
+define with value
+================================================================================
+
+-D test=value
+--define key=complex:value
+
+---
+
+(source_file
+  (define
+    (constant))
+  (define
+    (constant)))
+
+================================================================================
+resource with name
+================================================================================
+
+-r assets/image.png@my_image
+--resource data.txt@config
+
+---
+
+(source_file
+  (resource
+    (file)
+    (resource_name))
+  (resource
+    (file)
+    (resource_name)))
+
+================================================================================
+server addresses
+================================================================================
+
+--server-listen stdio
+--server-listen localhost:8080
+
+---
+
+(source_file
+  (server_listen
+    (server_address))
+  (server_listen
+    (server_address)))
+
+================================================================================
+custom target
+================================================================================
+
+--custom-target neko
+--custom-target cs=out
+
+---
+
+(source_file
+  (target
+    (custom_target))
+  (target
+    (custom_target)))
+
+================================================================================
+run with arguments
+================================================================================
+
+--run my.App arg1 arg2
+
+---
+
+(source_file
+  (target
+    (type_path
+      (package)
+      (type))
+    (argument)
+    (argument)))
+
+================================================================================
+dce modes
+================================================================================
+
+--dce std
+--dce full
+--dce no
+
+---
+
+(source_file
+  (dce
+    (dce_mode))
+  (dce
+    (dce_mode))
+  (dce
+    (dce_mode)))

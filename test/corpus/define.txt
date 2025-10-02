@@ -1,25 +1,11 @@
-===========
-define flag
-===========
+======
+define
+======
 
--D value
-
----
-
-(source_file
-  (flag_define
-    (define_key)))
-
-======================
-define flag with value
-======================
-
--D key=value
+-D test
 
 ---
 
 (source_file
-  (flag_define
-    (define_key)
-    (define_value)))
-
+  (define
+    (constant)))

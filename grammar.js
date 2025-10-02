@@ -7,33 +7,9 @@
 /// <reference types="tree-sitter-cli/dsl" />
 // @ts-check
 
-const simpleFlags = [
-  "--undefine",
-  "--haxelib-global",
-  "--no-traces",
-  "--no-output",
-  "--no-inline",
-  "--no-opt",
-  "-v",
-  "--verbose",
-  "--debug",
-  "--prompt",
-  "--times",
-  "--each",
-  "--next",
-  "--display",
-  "--version",
-  "-h",
-  "--help",
-  "--help-defines",
-  "--help-user-defines",
-  "--help-metas",
-  "--help-user-metas",
-];
-
 module.exports = grammar({
   name: "hxml",
-  extras: $ => [/\s+/],
+  extras: _ => [/\s+/],
   rules: {
 
     source_file: $ => repeat(choice(
@@ -51,100 +27,119 @@ module.exports = grammar({
       $.main,
       $.remap,
       $.resource,
-      // $.section,
       $.server_connect,
       $.server_listen,
       $.target,
       $.type_path,
       $.flag,
-      $.debug,
     )),
 
-    //TODO:
-    // section: $ => seq(
-    //   alias("--next", $.flag),
-    //   repeat(choice(
-    //     $.flag,
-    //     $.define,
-    //     $.target,
-    //     $.macro,
-    //     $.connect,
-    //     $.server_connect,
-    //     $.server_listen,
-    //     $.cmd
-    //   ))
-    // ),
-    // conflicts: $ => [$.section],
+    // Standalone flags without arguments
+    flag: _ => token(choice(
+      "--debug",
+      "--undefine",
+      "--haxelib-global",
+      "--no-traces",
+      "--no-output",
+      "--no-inline",
+      "--no-opt",
+      "-v",
+      "--verbose",
+      "--prompt",
+      "--times",
+      "--each",
+      "--next",
+      "--display",
+      "--version",
+      "-h",
+      "--help",
+      "--help-defines",
+      "--help-user-defines",
+      "--help-metas",
+      "--help-user-metas",
+    )),
 
-    flag: $ => token(choice(...simpleFlags)),
-    debug: $ => token("--debug"),
-
+    // Define directives: -D key or -D key=value
     define: $ => seq(
       choice("-D", "--define"),
-      alias(/[^#\s]+/, $.constant)
+      alias(/[^#\s=]+(=[^#\s]*)?/, $.constant)
     ),
 
+    // Target compilation options
     target: $ => choice(
-      seq(alias("--js", $.flag), $.file),
-      seq(alias("--lua", $.flag), $.file),
-      seq(alias("--swf", $.flag), $.file),
-      seq(alias("--neko", $.flag), $.file),
-      seq(alias("--php", $.flag), $.directory),
-      seq(alias("--cpp", $.flag), $.directory),
-      seq(alias("--cppia", $.flag), $.file),
-      seq(alias("--jvm", $.flag), $.file),
-      seq(alias("--python", $.flag), $.file),
-      seq(alias("--hl", $.flag), $.file),
-      seq(alias("--custom-target", $.flag), alias(/ [A - Za - z0 -9_ -] + (= [^#\s] +) ?/, $.custom_target)),
-      seq(alias("--run", $.flag), $.type_path, repeat($.path)),
-      alias("--interp", $.flag),
+      seq("--js", $.file),
+      seq("--lua", $.file),
+      seq("--swf", $.file),
+      seq("--neko", $.file),
+      seq("--php", $.directory),
+      seq("--cpp", $.directory),
+      seq("--cppia", $.file),
+      seq("--jvm", $.file),
+      seq("--python", $.file),
+      seq("--hl", $.file),
+      seq("--custom-target", alias(/[A-Za-z0-9_-]+(=[^#\s]+)?/, $.custom_target)),
+      seq("--run", $.type_path, repeat($.argument)),
+      "--interp"
     ),
 
-    // main: $ => seq(alias(choice("-m", "--main"), $.flag), $.dot_path),
+    // Main class specification
     main: $ => seq(choice("-m", "--main"), $.dot_path),
-    class_path: $ => seq(alias(choice("-p", "--class-path"), $.flag), $.directory),
-    hxb_lib: $ => seq(alias("--hxb-lib", $.flag), $.file),
 
+    // Class path specification
+    class_path: $ => seq(choice("-p", "--class-path"), $.directory),
+
+    // Haxe bytecode library
+    hxb_lib: $ => seq("--hxb-lib", $.file),
+
+    // Library specification with optional version
     library: $ => seq(
-      alias(choice("-L", "--library"), $.flag),
-      token(/[A-Za-z0-9_.-]+/)
+      choice("-L", "--library"),
+      alias(/[A-Za-z0-9_.-]+(:[A-Za-z0-9_.-]+)?/, $.library_spec)
     ),
-    // version: $ => /[A-Za-z0-9_.-]+/, // TODO:
 
-    macro: $ => seq(alias("--macro", $.flag), $.expr),
-    expr: $ => choice(
-      // unquoted: allow identifiers, dots, parentheses, semicolons
+    // Macro execution
+    macro: $ => seq("--macro", $.expr),
+    // Macro expressions - can be unquoted or single-quoted
+    expr: _ => choice(
+      // Unquoted: identifiers, dots, parentheses, semicolons
       token(/[A-Za-z_][A-Za-z0-9_.]*(?:\([^)]*\))?;?/),
-      // single-quoted: anything until closing '
+      // Single-quoted: anything until closing quote
       token(/'[^']*'/)
     ),
 
-    cmd: $ => seq(alias("--cmd", $.flag), $.shellcommand),
-    cwd: $ => seq(alias(choice("-C", "--cwd"), $.flag), $.directory),
-    dce: $ => seq(alias("--dce", $.flag), alias(choice("std", "full", "no"), $.constant)),
-    remap: $ => seq(alias("--remap", $.flag), seq($.package_ident, ":", $.package_ident)),
-    resource: $ => seq(alias(choice("-r", "--resource"), $.flag), $.file),//TODO: @name
+    cmd: $ => seq("--cmd", $.command),
+    cwd: $ => seq(choice("-C", "--cwd"), $.directory),
+    dce: $ => seq("--dce", alias(choice("std", "full", "no"), $.dce_mode)),
+    remap: $ => seq("--remap", seq($.package, ":", $.package)),
+    resource: $ => seq(
+      choice("-r", "--resource"),
+      $.file,
+      optional(seq("@", $.resource_name))
+    ),
 
-    connect: $ => seq(alias("--connect", $.flag), /[^#\s]+/),
-    server_listen: $ => seq(alias("--server-listen", $.flag), alias(/[^#\s]+/, $.string)),
-    server_connect: $ => seq(alias("--server-connect", $.flag), alias(/[^#\s]+/, $.string)),
+    connect: $ => seq("--connect", $.net_address),
+    server_listen: $ => seq("--server-listen", $.server_address),
+    server_connect: $ => seq("--server-connect", $.server_address),
 
-    dot_path: $ => token(/[A-Za-z_][A-Za-z0-9_.-]*/),
-    path: $ => token(/[^#\s]+/),
-    file: $ => token(/[^#\s]+/),
-    directory: $ => token(/[^#\s]+/),
-    shellcommand: $ => token(/[^#\s][^#\n]*/),
+    dot_path: _ => token(/[A-Za-z_][A-Za-z0-9_.-]*/),
+    argument: _ => token(/[^#\s]+/),
+    file: _ => token(/[^#\s@]+/),
+    directory: _ => token(/[^#\s]+/),
+    command: _ => token(/[^#\s][^#\n]*/),
 
-    // either [IPv6] or IPv4 or hostname (optional) followed by :port, OR plain port
-    net_address: $ => token(
+    // Network address: [IPv6], IPv4, hostname, or just port
+    net_address: _ => token(
       /(?:\[[0-9A-Fa-f:]+\]|[0-9]{1,3}(?:\.[0-9]{1,3}){3}|[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?)*)?:[0-9]{1,5}|[0-9]{1,5}/
     ),
 
-    package_ident: $ => token(/[a-z][A-Za-z0-9_]*/),
-    type_ident: $ => token(/[A-Z][A-Za-z0-9_]*/),
+    server_address: _ => token(choice("stdio", /[^#\s]+/)),
+    resource_name: _ => token(/[A-Za-z_][A-Za-z0-9_]*/),
+
+    package: _ => token(/[a-z][A-Za-z0-9_]*/),
+    type: _ => token(/[A-Z][A-Za-z0-9_]*/),
     type_path: $ => seq(
-      optional(seq($.package_ident, repeat(seq(".", $.package_ident)), ".")),
-      $.type_ident
+      optional(seq($.package, repeat(seq(".", $.package)), ".")),
+      $.type
     ),
 
     comment: _ => token(seq("#", /.*/)),

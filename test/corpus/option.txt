@@ -1,0 +1,14 @@
+======
+option
+======
+
+--main App
+-m pkg.App
+
+---
+
+(source_file
+  (main
+    (dot_path))
+  (main
+    (dot_path)))
