@@ -1,6 +1,16 @@
 # tree-sitter-hxml
 
-A [tree-sitter](https://tree-sitter.github.io/tree-sitter/) grammar for [Haxe](https://haxe.org/) HXML files.
+A [tree-sitter](https://tree-sitter.github.io/tree-sitter/) grammar for [Haxe](https://haxe.org/) [HXML](https://haxe.org/manual/compiler-usage-hxml.html) files.
+
+## Grammar Support
+
+- All compilation targets (`--js`, `--cpp`, `--hl`, ...)
+- Library dependencies with versions (`--library lib:1.2.3`)
+- Defines with values (`-D key=value`)
+- Resource embedding (`--resource file@name`)
+- Macro execution (`--macro expr`)
+- Server configurations (`--connect`, `--server-listen`)
+- Custom targets
 
 ## Installation
 
@@ -23,26 +33,9 @@ A [tree-sitter](https://tree-sitter.github.io/tree-sitter/) grammar for [Haxe](h
 }
 ```
 
-### CLI
-
-```bash
-npm install tree-sitter-hxml
-npx tree-sitter parse example.hxml
-```
-
-## Grammar Support
-
-- All compilation targets (`--js`, `--cpp`, `--neko`, etc.)
-- Library dependencies with versions (`--library lib:1.2.3`)
-- Defines with values (`-D key=value`)
-- Resource embedding (`--resource file@name`)
-- Macro execution (`--macro expr`)
-- Server configurations (`--connect`, `--server-listen`)
-- Custom targets and all other HXML features
-
 ## Examples
 
-See the [`examples/`](examples/) directory for comprehensive HXML configurations covering various use cases.
+See the [`examples/`](examples/) directory for comprehensive hxml configurations covering various use cases.
 
 ## Development
 
@@ -59,4 +52,3 @@ npx tree-sitter test
 ```
 
 [![test](https://github.com/tong/tree-sitter-hxml/actions/workflows/test-parser.yml/badge.svg)](https://github.com/tong/tree-sitter-hxml/actions/workflows/test-parser.yml)
-

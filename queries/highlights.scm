@@ -16,6 +16,7 @@
 (cwd) @keyword
 (dce) @keyword
 (define) @keyword
+(hxb) @keyword
 (hxb_lib) @keyword
 (library) @keyword
 (macro) @keyword

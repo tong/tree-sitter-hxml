@@ -21,6 +21,7 @@ module.exports = grammar({
       $.dce,
       $.define,
       $.display,
+      $.hxb,
       $.hxb_lib,
       $.include,
       $.library,
@@ -94,6 +95,7 @@ module.exports = grammar({
     class_path: $ => seq(choice("-p", "--class-path"), $.directory),
 
     // Haxe bytecode library
+    hxb: $ => seq("--hxb", $.file),
     hxb_lib: $ => seq("--hxb-lib", $.file),
 
     // Library specification with optional version
@@ -102,9 +104,8 @@ module.exports = grammar({
       alias(/[A-Za-z0-9_.-]+(:[A-Za-z0-9_.-]+)?/, $.library_spec)
     ),
 
-    // Macro execution
+    // Macro - expressions can be unquoted or single-quoted
     macro: $ => seq("--macro", $.expr),
-    // Macro expressions - can be unquoted or single-quoted
     expr: _ => choice(
       // Unquoted: identifiers, dots, parentheses, semicolons
       token(/[A-Za-z_][A-Za-z0-9_.]*(?:\([^)]*\))?;?/),
