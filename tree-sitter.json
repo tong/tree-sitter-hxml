@@ -6,9 +6,7 @@
       "camelcase": "Hxml",
       "title": "Hxml",
       "scope": "source.hxml",
-      "file-types": [
-        "hxml"
-      ],
+      "file-types": ["hxml"],
       "highlights": "queries/highlights.scm",
       "injection-regex": "^hxml$",
       "class-name": "TreeSitterHxml"

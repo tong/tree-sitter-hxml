@@ -21,10 +21,6 @@
           },
           {
             "type": "SYMBOL",
-            "name": "comment"
-          },
-          {
-            "type": "SYMBOL",
             "name": "connect"
           },
           {
@@ -34,6 +30,14 @@
           {
             "type": "SYMBOL",
             "name": "define"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "display"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "hxb"
           },
           {
             "type": "SYMBOL",
@@ -81,6 +85,18 @@
           },
           {
             "type": "SYMBOL",
+            "name": "undefine"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "json_output"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "xml_output"
+          },
+          {
+            "type": "SYMBOL",
             "name": "flag"
           }
         ]
@@ -94,10 +110,6 @@
           {
             "type": "STRING",
             "value": "--debug"
-          },
-          {
-            "type": "STRING",
-            "value": "--undefine"
           },
           {
             "type": "STRING",
@@ -142,10 +154,6 @@
           {
             "type": "STRING",
             "value": "--next"
-          },
-          {
-            "type": "STRING",
-            "value": "--display"
           },
           {
             "type": "STRING",
@@ -202,6 +210,32 @@
           },
           "named": true,
           "value": "constant"
+        }
+      ]
+    },
+    "undefine": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "--undefine"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "argument"
+        }
+      ]
+    },
+    "display": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "--display"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "argument"
         }
       ]
     },
@@ -365,7 +399,7 @@
             },
             {
               "type": "SYMBOL",
-              "name": "type_path"
+              "name": "dot_path"
             },
             {
               "type": "REPEAT",
@@ -423,6 +457,19 @@
         {
           "type": "SYMBOL",
           "name": "directory"
+        }
+      ]
+    },
+    "hxb": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "--hxb"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "file"
         }
       ]
     },
@@ -495,6 +542,32 @@
             "type": "PATTERN",
             "value": "'[^']*'"
           }
+        }
+      ]
+    },
+    "json_output": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "--json"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "file"
+        }
+      ]
+    },
+    "xml_output": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "--xml"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "file"
         }
       ]
     },
@@ -576,7 +649,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "package"
+              "name": "dot_path"
             },
             {
               "type": "STRING",
@@ -584,7 +657,7 @@
             },
             {
               "type": "SYMBOL",
-              "name": "package"
+              "name": "dot_path"
             }
           ]
         }
@@ -676,7 +749,7 @@
       "type": "TOKEN",
       "content": {
         "type": "PATTERN",
-        "value": "[A-Za-z_][A-Za-z0-9_.-]*"
+        "value": "[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*"
       }
     },
     "argument": {
@@ -825,6 +898,10 @@
     {
       "type": "PATTERN",
       "value": "\\s+"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "comment"
     }
   ],
   "conflicts": [],

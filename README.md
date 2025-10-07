@@ -1,6 +1,6 @@
 # tree-sitter-hxml
 
-A [tree-sitter](https://tree-sitter.github.io/tree-sitter/) grammar for [Haxe](https://haxe.org/) [HXML](https://haxe.org/manual/compiler-usage-hxml.html) files.
+A [tree-sitter](https://tree-sitter.github.io/tree-sitter/) grammar for [haxe](https://haxe.org/) [hxml](https://haxe.org/manual/compiler-usage-hxml.html) files.
 
 ## Grammar Support
 
@@ -16,18 +16,21 @@ A [tree-sitter](https://tree-sitter.github.io/tree-sitter/) grammar for [Haxe](h
 
 ### Neovim
 
+You need to be on the [main](https://github.com/nvim-treesitter/nvim-treesitter/tree/main) branch of nvim-treesitter (not master)
+
 ```lua
 {
   "nvim-treesitter/nvim-treesitter",
+  branch = "main",
+  build = ":TSUpdate",
   config = function()
-    local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
-    parser_config.hxml = {
+    local parsers = require("nvim-treesitter.parsers")
+    parsers.hxml = {
       install_info = {
         url = "https://github.com/tong/tree-sitter-hxml",
-        files = {"src/parser.c"},
-        branch = "main",
+        queries = "queries",
+        generate = true,
       },
-      filetype = "hxml",
     }
   end,
 }
