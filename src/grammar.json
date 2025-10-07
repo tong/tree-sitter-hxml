@@ -530,18 +530,25 @@
       "type": "CHOICE",
       "members": [
         {
-          "type": "TOKEN",
-          "content": {
-            "type": "PATTERN",
-            "value": "[A-Za-z_][A-Za-z0-9_.]*(?:\\([^)]*\\))?;?"
-          }
+          "type": "PATTERN",
+          "value": "[A-Za-z_][A-Za-z0-9_.]*(?:\\([^)]*\\))?;?"
         },
         {
-          "type": "TOKEN",
-          "content": {
-            "type": "PATTERN",
-            "value": "'[^']*'"
-          }
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "'"
+            },
+            {
+              "type": "PATTERN",
+              "value": "[^']*"
+            },
+            {
+              "type": "STRING",
+              "value": "'"
+            }
+          ]
         }
       ]
     },

@@ -1,6 +1,6 @@
 {
   "name": "tree-sitter-hxml",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Haxe hxml files",
   "repository": "https://github.com/tong/tree-sitter-hxml",
   "license": "MIT",

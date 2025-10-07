@@ -458,6 +458,10 @@
     }
   },
   {
+    "type": "'",
+    "named": false
+  },
+  {
     "type": "--class-path",
     "named": false
   },
