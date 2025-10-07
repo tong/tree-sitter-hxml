@@ -115,10 +115,10 @@ module.exports = grammar({
     macro: ($) => seq("--macro", $.expr),
     expr: (_) =>
       choice(
-        // Unquoted: identifiers, dots, parentheses, semicolons
-        token(/[A-Za-z_][A-Za-z0-9_.]*(?:\([^)]*\))?;?/),
-        // Single-quoted: anything until closing quote
-        token(/'[^']*'/),
+        // unquoted expression
+        /[A-Za-z_][A-Za-z0-9_.]*(?:\([^)]*\))?;?/,
+        // quoted expression
+        seq("'", /[^']*/, "'"),
       ),
 
     json_output: ($) => seq("--json", $.file),
