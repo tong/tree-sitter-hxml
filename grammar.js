@@ -9,7 +9,7 @@
 
 module.exports = grammar({
   name: "hxml",
-  extras: (_) => [/\s+/],
+  extras: ($) => [/\s+/, $.comment],
   rules: {
     source_file: ($) =>
       repeat(
@@ -17,7 +17,6 @@ module.exports = grammar({
           $.class_path,
           $.cmd,
           $.cwd,
-          $.comment,
           $.connect,
           $.dce,
           $.define,
