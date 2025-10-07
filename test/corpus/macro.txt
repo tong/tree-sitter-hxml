@@ -1,0 +1,29 @@
+============================
+macro with quoted expression
+============================
+
+--macro 'some.thing.Any.test()'
+
+---
+
+(source_file (macro (expr)))
+
+==============================
+macro with unquoted expression
+==============================
+
+--macro some.thing.Any.test()
+
+---
+
+(source_file (macro (expr)))
+
+===============================
+macro expression with arguments
+===============================
+
+--macro include('some.pack', true)
+
+---
+
+(source_file (macro (expr)))
