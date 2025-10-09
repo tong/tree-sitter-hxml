@@ -29,7 +29,6 @@
 (json_output) @keyword
 (xml_output) @keyword
 
-
 ;;;
 ;;; Values & Arguments
 ;;;
@@ -42,20 +41,24 @@
 (net_address) @string
 (server_address) @string
 
+;;
 ;; Paths and Types
+;;
 (file) @string
 (directory) @string
 (include) @string ; hxml file inclusion
-(dot_path) @namespace
+(package) @namespace
 (type_path) @type
 (package) @namespace
 (resource_name) @property
 
 ;; Other arguments
+
 (command) @string
 (argument) @string
 
 ;; Macro calls
+
 (macro
   (expr) @function)
 

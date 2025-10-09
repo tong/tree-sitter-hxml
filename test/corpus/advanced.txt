@@ -70,7 +70,10 @@ run with arguments
 
 (source_file
   (target
-    (dot_path)
+    (type_path
+      (package
+        (pack))
+      (type))
     (argument)
     (argument)))
 

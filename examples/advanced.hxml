@@ -41,6 +41,7 @@
 
 # Complex macros
 --macro advanced.Macros.processAssets()
+--macro advanced.Macros.processAssets(1,2,"test")
 --macro 'Build.optimize("release")'
 --macro 'Logger.setup({level: "info", output: "console"})'
 
@@ -80,3 +81,6 @@
 # Comments and documentation
 # This build creates multiple outputs
 # for different deployment scenarios
+
+--undefine dev
+#--display

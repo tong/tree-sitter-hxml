@@ -9,6 +9,10 @@ option
 
 (source_file
   (main
-    (dot_path))
+    (type_path
+      (type)))
   (main
-    (dot_path)))
+    (type_path
+      (package
+        (pack))
+      (type))))
