@@ -1,6 +1,8 @@
 # tree-sitter-hxml
 
-A [tree-sitter](https://tree-sitter.github.io/tree-sitter/) grammar for [haxe](https://haxe.org/) [hxml](https://haxe.org/manual/compiler-usage-hxml.html) files.
+A [tree-sitter](https://tree-sitter.github.io/) grammar for [haxe](https://haxe.org/) [hxml](https://haxe.org/manual/compiler-usage-hxml.html) files.
+
+Haxe grammar: <https://github.com/tong/tree-sitter-haxe/>
 
 ## Grammar Support
 
@@ -11,30 +13,6 @@ A [tree-sitter](https://tree-sitter.github.io/tree-sitter/) grammar for [haxe](h
 - Macro execution (`--macro expr`)
 - Server configurations (`--connect`, `--server-listen`)
 - Custom targets
-
-## Installation
-
-### Neovim
-
-You need to be on the [main](https://github.com/nvim-treesitter/nvim-treesitter/tree/main) branch of nvim-treesitter (not master)
-
-```lua
-{
-  "nvim-treesitter/nvim-treesitter",
-  branch = "main",
-  build = ":TSUpdate",
-  config = function()
-    local parsers = require("nvim-treesitter.parsers")
-    parsers.hxml = {
-      install_info = {
-        url = "https://github.com/tong/tree-sitter-hxml",
-        queries = "queries",
-        generate = true,
-      },
-    }
-  end,
-}
-```
 
 ## Examples
 
