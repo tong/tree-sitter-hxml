@@ -120,6 +120,11 @@
     "fields": {}
   },
   {
+    "type": "file",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "hxb",
     "named": true,
     "fields": {},
@@ -203,7 +208,22 @@
       "required": true,
       "types": [
         {
-          "type": "dot_path",
+          "type": "type_path",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "package",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "pack",
           "named": true
         }
       ]
@@ -212,35 +232,53 @@
   {
     "type": "remap",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "dot_path",
-          "named": true
-        }
-      ]
+    "fields": {
+      "package": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "package",
+            "named": true
+          }
+        ]
+      },
+      "target": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "package",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
     "type": "resource",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "file",
-          "named": true
-        },
-        {
-          "type": "resource_name",
-          "named": true
-        }
-      ]
+    "fields": {
+      "file": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "file",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "resource_name",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -288,6 +326,10 @@
         },
         {
           "type": "cmd",
+          "named": true
+        },
+        {
+          "type": "comment",
           "named": true
         },
         {
@@ -398,11 +440,11 @@
           "named": true
         },
         {
-          "type": "dot_path",
+          "type": "file",
           "named": true
         },
         {
-          "type": "file",
+          "type": "type_path",
           "named": true
         }
       ]
@@ -631,8 +673,7 @@
   },
   {
     "type": "comment",
-    "named": true,
-    "extra": true
+    "named": true
   },
   {
     "type": "constant",
@@ -644,14 +685,6 @@
   },
   {
     "type": "dce_mode",
-    "named": true
-  },
-  {
-    "type": "dot_path",
-    "named": true
-  },
-  {
-    "type": "file",
     "named": true
   },
   {
@@ -671,7 +704,7 @@
     "named": true
   },
   {
-    "type": "package",
+    "type": "pack",
     "named": true
   },
   {
