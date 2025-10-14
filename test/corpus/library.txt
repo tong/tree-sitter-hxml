@@ -8,10 +8,11 @@ library
 ---
 
 (source_file
-  (library
-    (library_spec))
-  (library
-    (library_spec)))
+  (section
+    (library
+      (library_spec))
+    (library
+      (library_spec))))
 
 ====================
 library with version
@@ -23,7 +24,8 @@ library with version
 ---
 
 (source_file
-  (library
-    (library_spec))
-  (library
-    (library_spec)))
+  (section
+    (library
+      (library_spec))
+    (library
+      (library_spec))))

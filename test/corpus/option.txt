@@ -3,16 +3,16 @@ option
 ======
 
 --main App
--m pkg.App
+-m pkg1.pkg2.App
 
 ---
 
 (source_file
-  (main
-    (type_path
-      (type)))
-  (main
-    (type_path
-      (package
-        (pack))
-      (type))))
+  (section
+    (main
+      (type_path
+        (type)))
+    (main
+      (type_path
+        (pack)
+        (type)))))

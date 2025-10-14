@@ -8,8 +8,9 @@ comment
 ---
 
 (source_file
-  (comment)
-  (comment))
+  (section
+    (comment)
+    (comment)))
 
 =======
 include
@@ -20,5 +21,6 @@ common.hxml
 ---
 
 (source_file
-  (include))
+  (section
+    (include)))
 

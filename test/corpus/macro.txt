@@ -6,7 +6,9 @@ macro with quoted expression
 
 ---
 
-(source_file (macro (expr)))
+(source_file
+  (section
+    (macro (expr))))
 
 ==============================
 macro with unquoted expression
@@ -16,7 +18,9 @@ macro with unquoted expression
 
 ---
 
-(source_file (macro (expr)))
+(source_file
+  (section
+    (macro (expr))))
 
 ===============================
 macro expression with arguments
@@ -26,4 +30,6 @@ macro expression with arguments
 
 ---
 
-(source_file (macro (expr)))
+(source_file
+  (section
+    (macro (expr))))

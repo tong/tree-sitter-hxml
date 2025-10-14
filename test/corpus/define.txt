@@ -7,5 +7,6 @@ define
 ---
 
 (source_file
-  (define
-    (constant)))
+  (section
+    (define
+      (constant))))

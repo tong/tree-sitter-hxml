@@ -1,18 +1,13 @@
-/**
- * @file Haxe hxml files
- * @author tong <tong@disktree.net>
- * @license MIT
- */
-
 /// <reference types="tree-sitter-cli/dsl" />
 // @ts-check
 
 export default grammar({
   name: "hxml",
   extras: (_) => [/\s+/],
-  conflicts: ($) => [[$.package]],
   rules: {
-    source_file: ($) => repeat($._line),
+    source_file: ($) => repeat($.section),
+    section: ($) => prec.right(seq(optional($._next), repeat1($._line))),
+    _next: (_) => token("--next"),
     _line: ($) =>
       seq(
         optional(
@@ -60,7 +55,6 @@ export default grammar({
           "--prompt",
           "--times",
           "--each",
-          "--next",
           "--version",
           "-h",
           "--help",
@@ -158,8 +152,8 @@ export default grammar({
 
     type_path: ($) =>
       seq(optional(seq($.package, ".")), $.type, repeat(seq(".", $.type))),
-    package: ($) => seq($.pack, repeat(seq(".", $.pack))),
-    pack: (_) => token(/[a-z][A-Za-z0-9_]*/),
+    package: ($) => prec.right(1, seq($.pack, repeat(seq(".", $.pack)))),
+    pack: (_) => token(/[A-Za-z][A-Za-z0-9_]*/),
     type: (_) => token(/[A-Z][A-Za-z0-9_]*/),
 
     file: ($) => choice($._quoted_arg, token(/[^\s@#"]+/)),

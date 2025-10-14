@@ -8,5 +8,6 @@ flag
 ---
 
 (source_file
-  (flag)
-  (flag))
+  (section
+    (flag)
+    (flag)))

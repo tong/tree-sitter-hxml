@@ -1,15 +1,13 @@
-;; HXML semantic highlighting
-
 (comment) @comment
 
-;;;
 ;;; Keywords & Flags
-;;;
 
 ;; Simple flags without arguments
+;;
 (flag) @keyword
 
 ;; Flags with arguments
+;;
 (class_path) @keyword
 (cmd) @keyword
 (connect) @keyword
@@ -29,11 +27,10 @@
 (json_output) @keyword
 (xml_output) @keyword
 
-;;;
-;;; Values & Arguments
-;;;
+; (next) @keyword
 
 ;; Literals
+;;
 (constant) @constant
 (library_spec) @constant
 (dce_mode) @constant
@@ -41,7 +38,6 @@
 (net_address) @string
 (server_address) @string
 
-;;
 ;; Paths and Types
 ;;
 (file) @string
@@ -53,19 +49,16 @@
 (resource_name) @property
 
 ;; Other arguments
-
+;;
 (command) @string
 (argument) @string
 
 ;; Macro calls
-
+;;
 (macro
   (expr) @function)
 
-;;;
-;;; Rule specializations
-;;;
-
 ;; Highlight the constant within a define statement
+;;
 (define
   (constant) @constant)

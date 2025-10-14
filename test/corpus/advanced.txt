@@ -8,10 +8,11 @@ define with value
 ---
 
 (source_file
-  (define
-    (constant))
-  (define
-    (constant)))
+  (section
+    (define
+      (constant))
+    (define
+      (constant))))
 
 ================================================================================
 resource with name
@@ -23,12 +24,13 @@ resource with name
 ---
 
 (source_file
-  (resource
-    (file)
-    (resource_name))
-  (resource
-    (file)
-    (resource_name)))
+  (section
+    (resource
+      (file)
+      (resource_name))
+    (resource
+      (file)
+      (resource_name))))
 
 ================================================================================
 server addresses
@@ -40,10 +42,11 @@ server addresses
 ---
 
 (source_file
-  (server_listen
-    (server_address))
-  (server_listen
-    (server_address)))
+  (section
+    (server_listen
+      (server_address))
+    (server_listen
+      (server_address))))
 
 ================================================================================
 custom target
@@ -55,10 +58,11 @@ custom target
 ---
 
 (source_file
-  (target
-    (custom_target))
-  (target
-    (custom_target)))
+  (section
+    (target
+      (custom_target))
+    (target
+      (custom_target))))
 
 ================================================================================
 run with arguments
@@ -69,13 +73,13 @@ run with arguments
 ---
 
 (source_file
-  (target
-    (type_path
-      (package
-        (pack))
-      (type))
-    (argument)
-    (argument)))
+  (section
+    (target
+      (type_path
+        (pack)
+        (type))
+      (argument)
+      (argument))))
 
 ================================================================================
 dce modes
@@ -88,9 +92,10 @@ dce modes
 ---
 
 (source_file
-  (dce
-    (dce_mode))
-  (dce
-    (dce_mode))
-  (dce
-    (dce_mode)))
+  (section
+    (dce
+      (dce_mode))
+    (dce
+      (dce_mode))
+    (dce
+      (dce_mode))))
