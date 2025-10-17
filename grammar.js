@@ -4,8 +4,9 @@
 export default grammar({
   name: "hxml",
   extras: (_) => [/\s+/],
+  conflicts: ($) => [[$.package]],
   rules: {
-    source_file: ($) => repeat($.section),
+    hxml: ($) => repeat($.section),
     section: ($) => prec.right(seq(optional($._next), repeat1($._line))),
     _next: (_) => token("--next"),
     _line: ($) =>
@@ -150,11 +151,14 @@ export default grammar({
     _quoted_arg: (_) => token(seq('"', /[^"]*/, '"')),
     _arg_token: (_) => token(/[^\s#"]+/),
 
+    identifier: (_) => /[a-z_][a-zA-Z0-9_]*/,
+    package: ($) => seq($.identifier, repeat(seq(".", $.identifier))),
+    type_name: (_) => /[A-Z][a-zA-Z0-9_]*/,
     type_path: ($) =>
-      seq(optional(seq($.package, ".")), $.type, repeat(seq(".", $.type))),
-    package: ($) => prec.right(1, seq($.pack, repeat(seq(".", $.pack)))),
-    pack: (_) => token(/[A-Za-z][A-Za-z0-9_]*/),
-    type: (_) => token(/[A-Z][A-Za-z0-9_]*/),
+      choice(
+        seq($.package, ".", field("type", $.type_name)),
+        field("type", $.type_name),
+      ),
 
     file: ($) => choice($._quoted_arg, token(/[^\s@#"]+/)),
     directory: ($) => choice($._quoted_arg, $._arg_token),

@@ -6,7 +6,7 @@ macro with quoted expression
 
 ---
 
-(source_file
+(hxml
   (section
     (macro (expr))))
 
@@ -18,7 +18,7 @@ macro with unquoted expression
 
 ---
 
-(source_file
+(hxml
   (section
     (macro (expr))))
 
@@ -30,6 +30,6 @@ macro expression with arguments
 
 ---
 
-(source_file
+(hxml
   (section
     (macro (expr))))

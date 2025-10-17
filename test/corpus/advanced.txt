@@ -7,7 +7,7 @@ define with value
 
 ---
 
-(source_file
+(hxml
   (section
     (define
       (constant))
@@ -23,7 +23,7 @@ resource with name
 
 ---
 
-(source_file
+(hxml
   (section
     (resource
       (file)
@@ -41,7 +41,7 @@ server addresses
 
 ---
 
-(source_file
+(hxml
   (section
     (server_listen
       (server_address))
@@ -57,7 +57,7 @@ custom target
 
 ---
 
-(source_file
+(hxml
   (section
     (target
       (custom_target))
@@ -72,12 +72,13 @@ run with arguments
 
 ---
 
-(source_file
+(hxml
   (section
     (target
       (type_path
-        (pack)
-        (type))
+        (package
+          (identifier))
+        type: (type_name))
       (argument)
       (argument))))
 
@@ -91,7 +92,7 @@ dce modes
 
 ---
 
-(source_file
+(hxml
   (section
     (dce
       (dce_mode))

@@ -7,7 +7,7 @@ flag
 
 ---
 
-(source_file
+(hxml
   (section
     (flag)
     (flag)))

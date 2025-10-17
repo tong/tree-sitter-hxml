@@ -7,12 +7,14 @@ option
 
 ---
 
-(source_file
+(hxml
   (section
     (main
       (type_path
-        (type)))
+        type: (type_name)))
     (main
       (type_path
-        (pack)
-        (type)))))
+        (package
+          (identifier)
+          (identifier))
+        type: (type_name)))))

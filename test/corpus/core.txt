@@ -7,7 +7,7 @@ comment
 
 ---
 
-(source_file
+(hxml
   (section
     (comment)
     (comment)))
@@ -20,7 +20,7 @@ common.hxml
 
 ---
 
-(source_file
+(hxml
   (section
     (include)))
 
