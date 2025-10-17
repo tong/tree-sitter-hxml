@@ -3,10 +3,18 @@ define
 ======
 
 -D test
+-D resourcesPath=res
+--define key=complex:value
 
 ---
 
 (hxml
   (section
     (define
-      (constant))))
+      (define_key))
+    (define
+      (define_key)
+      (define_value))
+    (define
+      (define_key)
+      (define_value))))

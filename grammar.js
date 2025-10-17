@@ -87,7 +87,13 @@ export default grammar({
       ),
 
     define: ($) =>
-      seq(choice("-D", "--define"), alias(/[^#\s=]+(=[^#\s]*)?/, $.constant)),
+      seq(
+        choice("-D", "--define"),
+        seq(
+          alias(/[^#\s=]+/, $.define_key),
+          optional(seq("=", alias(/[^#\s]*/, $.define_value))),
+        ),
+      ),
     undefine: ($) => seq("--undefine", $.argument),
 
     display: ($) => seq("--display", $.argument),
@@ -100,7 +106,15 @@ export default grammar({
     library: ($) =>
       seq(
         choice("-L", "--library"),
-        alias(/[A-Za-z0-9_.-]+(:[A-Za-z0-9_.-]+)?/, $.library_spec),
+        seq(
+          alias(/[A-Za-z0-9_.-]+/, $.name),
+          optional(
+            seq(
+              token.immediate(":"),
+              choice($.version, alias(/[a-zA-Z0-9_.\-\:]+/, $.version)),
+            ),
+          ),
+        ),
       ),
 
     macro: ($) => seq("--macro", $.expr),
@@ -161,8 +175,9 @@ export default grammar({
       ),
 
     file: ($) => choice($._quoted_arg, token(/[^\s@#"]+/)),
-    directory: ($) => choice($._quoted_arg, $._arg_token),
     command: (_) => token(/[^#\n]+/),
+    directory: ($) => choice($._quoted_arg, $._arg_token),
+    version: (_) => token(/[0-9]+\.[0-9]+\.[0-9]+/),
 
     // Network address: [IPv6], IPv4, hostname, or just port
     net_address: (_) =>

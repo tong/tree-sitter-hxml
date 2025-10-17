@@ -10,9 +10,9 @@ library
 (hxml
   (section
     (library
-      (library_spec))
+      (name))
     (library
-      (library_spec))))
+      (name))))
 
 ====================
 library with version
@@ -26,6 +26,8 @@ library with version
 (hxml
   (section
     (library
-      (library_spec))
+      (name)
+      (version))
     (library
-      (library_spec))))
+      (name)
+      (version))))
