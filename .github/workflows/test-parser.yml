@@ -34,7 +34,7 @@ jobs:
         run: npx tree-sitter test
 
       - name: Test example files with comprehensive script
-        run: ./scripts/test-examples.sh
+        run: npm run test-examples
 
       - name: Validate specific edge cases
         run: |
