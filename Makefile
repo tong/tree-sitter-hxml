@@ -4,7 +4,7 @@ endif
 
 LANGUAGE_NAME := tree-sitter-hxml
 HOMEPAGE_URL := https://github.com/tong/tree-sitter-hxml
-VERSION := 0.2.0
+VERSION := 0.2.1
 
 # repository
 SRC_DIR := src

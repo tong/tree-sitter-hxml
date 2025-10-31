@@ -175,6 +175,21 @@
     }
   },
   {
+    "type": "include",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "file",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "json_output",
     "named": true,
     "fields": {},
@@ -306,6 +321,25 @@
     }
   },
   {
+    "type": "run",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "argument",
+          "named": true
+        },
+        {
+          "type": "type_path",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "section",
     "named": true,
     "fields": {},
@@ -386,6 +420,10 @@
           "named": true
         },
         {
+          "type": "run",
+          "named": true
+        },
+        {
           "type": "server_connect",
           "named": true
         },
@@ -447,13 +485,9 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": false,
       "types": [
-        {
-          "type": "argument",
-          "named": true
-        },
         {
           "type": "custom_target",
           "named": true
@@ -464,10 +498,6 @@
         },
         {
           "type": "file",
-          "named": true
-        },
-        {
-          "type": "type_path",
           "named": true
         }
       ]
@@ -528,10 +558,6 @@
         }
       ]
     }
-  },
-  {
-    "type": "'",
-    "named": false
   },
   {
     "type": "--class-path",
@@ -678,7 +704,35 @@
     "named": false
   },
   {
+    "type": "-cpp",
+    "named": false
+  },
+  {
+    "type": "-cppia",
+    "named": false
+  },
+  {
+    "type": "-hl",
+    "named": false
+  },
+  {
+    "type": "-js",
+    "named": false
+  },
+  {
+    "type": "-jvm",
+    "named": false
+  },
+  {
+    "type": "-lua",
+    "named": false
+  },
+  {
     "type": "-m",
+    "named": false
+  },
+  {
+    "type": "-neko",
     "named": false
   },
   {
@@ -686,7 +740,19 @@
     "named": false
   },
   {
+    "type": "-php",
+    "named": false
+  },
+  {
+    "type": "-python",
+    "named": false
+  },
+  {
     "type": "-r",
+    "named": false
+  },
+  {
+    "type": "-swf",
     "named": false
   },
   {
@@ -711,7 +777,8 @@
   },
   {
     "type": "comment",
-    "named": true
+    "named": true,
+    "extra": true
   },
   {
     "type": "custom_target",
@@ -735,10 +802,6 @@
   },
   {
     "type": "identifier",
-    "named": true
-  },
-  {
-    "type": "include",
     "named": true
   },
   {
