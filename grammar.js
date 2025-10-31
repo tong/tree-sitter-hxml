@@ -185,7 +185,7 @@ export default grammar({
         /(?:\[[0-9A-Fa-f:]+\]|[0-9]{1,3}(?:\.[0-9]{1,3}){3}|[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?)*)?:[0-9]{1,5}|[0-9]{1,5}/,
       ),
 
-    include: (_) => token(/[^#\s]+\.hxml/),
+    include: ($) => alias(/[^#\s]+\.hxml/, $.file),
     comment: (_) => token(seq("#", /.*/)),
   },
 });
