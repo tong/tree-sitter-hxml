@@ -2,7 +2,8 @@
 # Tests complex parsing scenarios
 
 # Unusual but valid paths and names
---main weird.Package123.Main_Class
+# --main weird.Package123.Main_Class
+--main weird.package123.Main_Class
 -p src_with_underscores
 -p /absolute/path/src
 -p ./relative/path
