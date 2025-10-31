@@ -1,10 +1,22 @@
-; Comments
 (comment) @comment
+[":" "="] @punctuation
 
-; Keywords / Flags
-(flag) @keyword
+[
+  (directory)
+  (file)
+  (include)
+] @string
 
-; Flags with arguments
+(command) @function
+
+(section) @section_block
+(section "--next") @keyword
+
+(package) @namespace
+(type_path) @type
+(type_name) @type
+(class_path) @type
+
 [
   (class_path)
   (cmd)
@@ -12,8 +24,10 @@
   (cwd)
   (dce)
   (define)
+  (flag)
   (hxb)
   (hxb_lib)
+  (json_output)
   (library)
   (macro)
   (main)
@@ -22,37 +36,35 @@
   (server_connect)
   (server_listen)
   (target)
-  (json_output)
+  (undefine)
   (xml_output)
 ] @keyword
 
-; Constants & Modes
+(library (name) @constant)
+(library (version) @number)
+
 [
-  ; (constant)
-  ; (library_spec)
-  (dce_mode)
   (custom_target)
+  (dce_mode)
 ] @constant
 
-; Strings / Paths
+(define_value) @string
+
 [
-  (file)
-  (directory)
-  (include)
-  (command)
   (argument)
+  (define_key)
+] @property
+
+[
+  (define_value)
   (net_address)
   (server_address)
 ] @string
 
-; Names & Types
-(package) @namespace
-(type_path) @type
-(resource_name) @property
-
-; Macro expressions
 (macro (expr) @function)
+; (net_address) @number
+(remap ":" @punctuation)
+(remap (package)  @type)
+(resource_name) @property
+(resource "@" @punctuation)
 
-; defines
-(define_key) @constant
-(define_value) @string
