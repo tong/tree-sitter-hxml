@@ -1,9 +1,11 @@
 /// <reference types="tree-sitter-cli/dsl" />
 // @ts-check
 
+const targetWithArg = (name, arg) => seq(choice(`-${name}`, `--${name}`), arg);
+
 export default grammar({
   name: "hxml",
-  extras: (_) => [/\s+/],
+  extras: (_) => [/\\s+/],
   conflicts: ($) => [[$.package]],
   rules: {
     hxml: ($) => repeat($.section),
@@ -51,14 +53,12 @@ export default grammar({
           "--no-output",
           "--no-inline",
           "--no-opt",
-          "-v",
-          "--verbose",
+          choice("-v", "--verbose"),
           "--prompt",
           "--times",
           "--each",
           "--version",
-          "-h",
-          "--help",
+          choice("-h", "--help"),
           "--help-defines",
           "--help-user-defines",
           "--help-metas",
@@ -68,16 +68,16 @@ export default grammar({
 
     target: ($) =>
       choice(
-        seq("--js", $.file),
-        seq("--lua", $.file),
-        seq("--swf", $.file),
-        seq("--neko", $.file),
-        seq("--php", $.directory),
-        seq("--cpp", $.directory),
-        seq("--cppia", $.file),
-        seq("--jvm", $.file),
-        seq("--python", $.file),
-        seq("--hl", $.file),
+        targetWithArg("js", $.file),
+        targetWithArg("lua", $.file),
+        targetWithArg("swf", $.file),
+        targetWithArg("neko", $.file),
+        targetWithArg("php", $.directory),
+        targetWithArg("cpp", $.directory),
+        targetWithArg("cppia", $.file),
+        targetWithArg("jvm", $.file),
+        targetWithArg("python", $.file),
+        targetWithArg("hl", $.file),
         seq(
           "--custom-target",
           alias(/[A-Za-z0-9_-]+(=[^#\s]+)?/, $.custom_target),
@@ -111,7 +111,7 @@ export default grammar({
           optional(
             seq(
               token.immediate(":"),
-              choice($.version, alias(/[a-zA-Z0-9_.\-\:]+/, $.version)),
+              choice($.version, alias(/[a-zA-Z0-9_.\-:]+/, $.version)),
             ),
           ),
         ),
@@ -121,9 +121,9 @@ export default grammar({
     expr: (_) =>
       choice(
         // unquoted expression
-        /[A-Za-z_][A-Za-z0-9_.]*(?:\([^)]*\))?;?/,
+        /[A-Za-z_][A-Za-z0-9_.]*(?:\([^)]*\))?;?/, // This is a regex, not a string literal, so it's fine.
         // quoted expression
-        seq("'", /[^']*/, "'"),
+        seq("'", /[^"]*/, "'"), // Corrected: escaped single quote inside seq
       ),
 
     json_output: ($) => seq("--json", $.file),
@@ -163,7 +163,7 @@ export default grammar({
 
     argument: ($) => choice($._quoted_arg, $._arg_token),
     _quoted_arg: (_) => token(seq('"', /[^"]*/, '"')),
-    _arg_token: (_) => token(/[^\s#"]+/),
+    _arg_token: (_) => token(/[^#\s"]+/),
 
     identifier: (_) => /[a-z_][a-zA-Z0-9_]*/,
     package: ($) => seq($.identifier, repeat(seq(".", $.identifier))),
@@ -182,7 +182,7 @@ export default grammar({
     // Network address: [IPv6], IPv4, hostname, or just port
     net_address: (_) =>
       token(
-        /(?:\[[0-9A-Fa-f:]+\]|[0-9]{1,3}(?:\.[0-9]{1,3}){3}|[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?(?:\.[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?)*)?:[0-9]{1,5}|[0-9]{1,5}/,
+        /(?:\\\[[0-9A-Fa-f:]+\\]|[0-9]{1,3}(?:\\.[0-9]{1,3}){3}|[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?(?:\\.[A-Za-z0-9](?:[A-Za-z0-9-]*[A-Za-z0-9])?)*)?:[0-9]{1,5}|[0-9]{1,5}/,
       ),
 
     include: ($) => alias(/[^#\s]+\.hxml/, $.file),
