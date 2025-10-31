@@ -1,9 +1,11 @@
 /// <reference types="tree-sitter-cli/dsl" />
 // @ts-check
 
+const flagWithArg = (short, long, arg) => seq(choice(short, long), arg);
+
 export default grammar({
   name: "hxml",
-  extras: (_) => [/\s+/],
+  extras: ($) => [/\s+/, $.comment],
   conflicts: ($) => [[$.package]],
   rules: {
     hxml: ($) => repeat($.section),
@@ -28,6 +30,7 @@ export default grammar({
             $.main,
             $.remap,
             $.resource,
+            $.run,
             $.server_connect,
             $.server_listen,
             $.target,
@@ -82,10 +85,14 @@ export default grammar({
           "--custom-target",
           alias(/[A-Za-z0-9_-]+(=[^#\s]+)?/, $.custom_target),
         ),
-        seq("--run", $.type_path, repeat($.argument)),
         "--interp",
       ),
 
+    interp: ($) => seq("--interp", $.type_path),
+    run: ($) => seq("--run", $.type_path, repeat($.argument)),
+    main: ($) => flagWithArg("-m", "--main", $.type_path),
+    class_path: ($) => flagWithArg("-p", "--class-path", $.directory),
+    display: ($) => seq("--display", $.argument),
     define: ($) =>
       seq(
         choice("-D", "--define"),
@@ -95,10 +102,6 @@ export default grammar({
         ),
       ),
     undefine: ($) => seq("--undefine", $.argument),
-
-    display: ($) => seq("--display", $.argument),
-    class_path: ($) => seq(choice("-p", "--class-path"), $.directory),
-    main: ($) => seq(choice("-m", "--main"), $.type_path),
 
     hxb: ($) => seq("--hxb", $.file),
     hxb_lib: ($) => seq("--hxb-lib", $.file),
@@ -120,10 +123,8 @@ export default grammar({
     macro: ($) => seq("--macro", $.expr),
     expr: (_) =>
       choice(
-        // unquoted expression
-        /[A-Za-z_][A-Za-z0-9_.]*(?:\([^)]*\))?;?/,
-        // quoted expression
-        seq("'", /[^']*/, "'"),
+        token(seq("'", /[^']*/, "'")), // Quoted expression
+        /[A-Za-z_][A-Za-z0-9_.]*(\(.*\))?;?/, // Unquoted expression
       ),
 
     json_output: ($) => seq("--json", $.file),
@@ -143,7 +144,7 @@ export default grammar({
     resource: ($) =>
       seq(
         choice("-r", "--resource"),
-        field("file", alias(choice($._quoted_arg, token(/[^\s@#"]+/)), $.file)),
+        field("file", $.file),
         optional(
           seq(
             token.immediate("@"),
@@ -161,6 +162,11 @@ export default grammar({
     server_connect: ($) => seq("--server-connect", $.server_address),
     server_address: (_) => token(choice("stdio", /[^#\s]+/)),
 
+    file: ($) => choice($._quoted_arg, token(/[^\s@#"]+/)),
+    command: (_) => token(/[^#\n]+/),
+    directory: ($) => choice($._quoted_arg, $._arg_token),
+    version: (_) => token(/[0-9]+\.[0-9]+\.[0-9]+/),
+
     argument: ($) => choice($._quoted_arg, $._arg_token),
     _quoted_arg: (_) => token(seq('"', /[^"]*/, '"')),
     _arg_token: (_) => token(/[^\s#"]+/),
@@ -173,11 +179,6 @@ export default grammar({
         seq($.package, ".", field("type", $.type_name)),
         field("type", $.type_name),
       ),
-
-    file: ($) => choice($._quoted_arg, token(/[^\s@#"]+/)),
-    command: (_) => token(/[^#\n]+/),
-    directory: ($) => choice($._quoted_arg, $._arg_token),
-    version: (_) => token(/[0-9]+\.[0-9]+\.[0-9]+/),
 
     // Network address: [IPv6], IPv4, hostname, or just port
     net_address: (_) =>
