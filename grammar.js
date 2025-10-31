@@ -1,6 +1,12 @@
 /// <reference types="tree-sitter-cli/dsl" />
 // @ts-check
 
+/**
+ * @param {string} short - Short flag (-v)
+ * @param {string} long - Long flag (--verbose)
+ * @param {Rule} arg
+ * @return {Rule}
+ */
 const flagWithArg = (short, long, arg) => seq(choice(short, long), arg);
 
 export default grammar({
@@ -12,41 +18,35 @@ export default grammar({
     section: ($) => prec.right(seq(optional($._next), repeat1($._line))),
     _next: (_) => token("--next"),
     _line: ($) =>
-      seq(
-        optional(
-          choice(
-            $.class_path,
-            $.cmd,
-            $.cwd,
-            $.connect,
-            $.dce,
-            $.define,
-            $.display,
-            $.hxb,
-            $.hxb_lib,
-            $.include,
-            $.library,
-            $.macro,
-            $.main,
-            $.remap,
-            $.resource,
-            $.run,
-            $.server_connect,
-            $.server_listen,
-            $.target,
-            $.type_path,
-            $.undefine,
-            $.json_output,
-            $.xml_output,
-            $.flag,
-          ),
-        ),
-        optional($.comment),
-        /\r?\n/,
+      choice(
+        $.class_path,
+        $.cmd,
+        $.cwd,
+        $.connect,
+        $.dce,
+        $.define,
+        $.display,
+        $.hxb,
+        $.hxb_lib,
+        $.include,
+        $.library,
+        $.macro,
+        $.main,
+        $.remap,
+        $.resource,
+        $.run,
+        $.server_connect,
+        $.server_listen,
+        $.target,
+        $.type_path,
+        $.undefine,
+        $.json_output,
+        $.xml_output,
+        $.flag,
       ),
 
     flag: (_) =>
-      token.immediate(
+      token(
         choice(
           "--debug",
           "--haxelib-global",

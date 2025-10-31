@@ -6,4 +6,4 @@
 
 --main some.any.Main
 # ^ @keyword
-       # ^ @type
+       # ^ @namespace
