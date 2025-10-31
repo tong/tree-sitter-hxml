@@ -1,0 +1,11 @@
+--debug
+# ^ keyword
+
+--macro App.build()
+# ^ keyword
+#       ^ function
+
+--cwd some/where
+# ^ keyword
+#     ^ string
+

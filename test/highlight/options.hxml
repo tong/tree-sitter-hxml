@@ -1,0 +1,9 @@
+  #
+# ^ @comment
+
+-p src
+# ^ @keyword
+
+--main some.any.Main
+# ^ @keyword
+       # ^ @type

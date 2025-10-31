@@ -22,5 +22,6 @@ common.hxml
 
 (hxml
   (section
-    (include)))
+    (include
+      (file))))
 
