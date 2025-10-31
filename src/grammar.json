@@ -45,137 +45,108 @@
       }
     },
     "_line": {
-      "type": "SEQ",
+      "type": "CHOICE",
       "members": [
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "class_path"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "cmd"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "cwd"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "connect"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "dce"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "define"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "display"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "hxb"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "hxb_lib"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "include"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "library"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "macro"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "main"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "remap"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "resource"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "run"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "server_connect"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "server_listen"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "target"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "type_path"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "undefine"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "json_output"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "xml_output"
-                },
-                {
-                  "type": "SYMBOL",
-                  "name": "flag"
-                }
-              ]
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
+          "type": "SYMBOL",
+          "name": "class_path"
         },
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "comment"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
+          "type": "SYMBOL",
+          "name": "cmd"
         },
         {
-          "type": "PATTERN",
-          "value": "\\r?\\n"
+          "type": "SYMBOL",
+          "name": "cwd"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "connect"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "dce"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "define"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "display"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "hxb"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "hxb_lib"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "include"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "library"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "macro"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "main"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "remap"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "resource"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "run"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "server_connect"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "server_listen"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "target"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "type_path"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "undefine"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "json_output"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "xml_output"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "flag"
         }
       ]
     },
     "flag": {
-      "type": "IMMEDIATE_TOKEN",
+      "type": "TOKEN",
       "content": {
         "type": "CHOICE",
         "members": [

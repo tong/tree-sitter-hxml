@@ -345,7 +345,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "class_path",
@@ -353,10 +353,6 @@
         },
         {
           "type": "cmd",
-          "named": true
-        },
-        {
-          "type": "comment",
           "named": true
         },
         {
