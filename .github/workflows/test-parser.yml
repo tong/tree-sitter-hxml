@@ -4,18 +4,24 @@ on:
   push:
     branches: [main, dev]
     paths:
-      - grammar.js
+      - bindings/**
+      - examples/**
+      - queries/**
       - src/**
       - test/**
-      - bindings/**
+      - .github/workflows/**
       - binding.gyp
+      - grammar.js
   pull_request:
     paths:
-      - grammar.js
+      - bindings/**
+      - examples/**
+      - queries/**
       - src/**
       - test/**
-      - bindings/**
+      - .github/workflows/**
       - binding.gyp
+      - grammar.js
 
 concurrency:
   group: ${{github.workflow}}-${{github.ref}}
