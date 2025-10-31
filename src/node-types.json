@@ -84,11 +84,15 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
-          "type": "constant",
+          "type": "define_key",
+          "named": true
+        },
+        {
+          "type": "define_value",
           "named": true
         }
       ]
@@ -155,6 +159,22 @@
     }
   },
   {
+    "type": "hxml",
+    "named": true,
+    "root": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "section",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "json_output",
     "named": true,
     "fields": {},
@@ -174,11 +194,15 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
-          "type": "library_spec",
+          "type": "name",
+          "named": true
+        },
+        {
+          "type": "version",
           "named": true
         }
       ]
@@ -223,7 +247,7 @@
       "required": true,
       "types": [
         {
-          "type": "pack",
+          "type": "identifier",
           "named": true
         }
       ]
@@ -282,39 +306,8 @@
     }
   },
   {
-    "type": "server_connect",
+    "type": "section",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "server_address",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "server_listen",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "server_address",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "source_file",
-    "named": true,
-    "root": true,
     "fields": {},
     "children": {
       "multiple": true,
@@ -420,6 +413,36 @@
     }
   },
   {
+    "type": "server_connect",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "server_address",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "server_listen",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "server_address",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "target",
     "named": true,
     "fields": {},
@@ -453,17 +476,24 @@
   {
     "type": "type_path",
     "named": true,
-    "fields": {},
+    "fields": {
+      "type": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "type_name",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
-      "multiple": true,
-      "required": true,
+      "multiple": false,
+      "required": false,
       "types": [
         {
           "type": "package",
-          "named": true
-        },
-        {
-          "type": "type",
           "named": true
         }
       ]
@@ -592,6 +622,10 @@
     "named": false
   },
   {
+    "type": "--next",
+    "named": false
+  },
+  {
     "type": "--php",
     "named": false
   },
@@ -664,6 +698,10 @@
     "named": false
   },
   {
+    "type": "=",
+    "named": false
+  },
+  {
     "type": "@",
     "named": false
   },
@@ -676,10 +714,6 @@
     "named": true
   },
   {
-    "type": "constant",
-    "named": true
-  },
-  {
     "type": "custom_target",
     "named": true
   },
@@ -688,7 +722,19 @@
     "named": true
   },
   {
+    "type": "define_key",
+    "named": true
+  },
+  {
+    "type": "define_value",
+    "named": true
+  },
+  {
     "type": "flag",
+    "named": true
+  },
+  {
+    "type": "identifier",
     "named": true
   },
   {
@@ -696,15 +742,11 @@
     "named": true
   },
   {
-    "type": "library_spec",
+    "type": "name",
     "named": true
   },
   {
     "type": "net_address",
-    "named": true
-  },
-  {
-    "type": "pack",
     "named": true
   },
   {
@@ -716,7 +758,11 @@
     "named": true
   },
   {
-    "type": "type",
+    "type": "type_name",
+    "named": true
+  },
+  {
+    "type": "version",
     "named": true
   }
 ]
