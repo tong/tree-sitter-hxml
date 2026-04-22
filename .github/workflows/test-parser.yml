@@ -32,13 +32,15 @@ jobs:
     name: Run tests
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: Setup node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           cache: "npm"
       - name: Install dependencies
         run: npm ci
+        env:
+          CXXFLAGS: "-std=c++20"
       - name: Generate parser
         run: npx tree-sitter generate
       - name: Run grammar tests
@@ -51,13 +53,15 @@ jobs:
     needs: test-parser
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           cache: "npm"
       - name: Install dependencies
         run: npm ci
+        env:
+          CXXFLAGS: "-std=c++20"
       - name: Generate parser
         run: npx tree-sitter generate
       - name: Build C library
@@ -78,7 +82,7 @@ jobs:
             exit 1
           fi
       - name: Upload parser artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: parser-binaries
           path: |
